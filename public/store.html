@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+</head>
+<body>
+    <h1>Store</h1>
+    <div id="ranks"></div>
+    <script>
+        fetch('http://localhost:3000/store/ranks')
+            .then(response => response.json())
+            .then(data => {
+                const ranksDiv = document.getElementById('ranks');
+                data.forEach(rank => {
+                    ranksDiv.innerHTML += `<div>
+                        <h3>${rank.name}</h3>
+                        <p>${rank.description}</p>
+                        <p>Price: $${rank.price}</p>
+                        <button onclick="purchase('${rank.name}')">Buy</button>
+                    </div>`;
+                });
+            });
 
+        async function purchase(rankName) {
+            // Handle the payment creation with Stripe here
+        }
+    </script>
+</body>
+</html>
